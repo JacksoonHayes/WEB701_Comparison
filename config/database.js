@@ -1,4 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/growandgive',
+    database: 'mongodb+srv://dbAdmin:admin@growandgive.x8icc.mongodb.net/?retryWrites=true&w=majority&appName=growandgive',
     secret: 'yoursecret'
 }

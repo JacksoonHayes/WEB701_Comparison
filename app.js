@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
+const session = require('express-session');
 const config = require('./config/database');
-require('./config/passport')(passport);
 
 // Connect to routes
-const users = require('./routes/users');
+const users = require('./routes/userRoute');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,12 +25,21 @@ mongoose.connection.on('error', (err) => {
 // CORS Middleware
 app.use(cors());
 
+// Express Session Middleware
+app.use(session({
+    secret: 'keyboard',
+    resave: true,
+    saveUninitialized: true
+}));
+
 // Body Parser Middleware
 app.use(bodyParser.json());
 
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+require('./config/passport')(passport);
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
