@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
 const config = require('./config/database');
+require('./config/passport')(passport);
 
 // Connect to routes
 const users = require('./routes/users');
@@ -23,8 +24,14 @@ mongoose.connection.on('error', (err) => {
 
 // CORS Middleware
 app.use(cors());
+
 // Body Parser Middleware
 app.use(bodyParser.json());
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
