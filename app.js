@@ -1,58 +1,52 @@
+// app.js
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
-const config = require('./config/database');
+const dotenv = require('dotenv');
+const connectDB = require('./config/database');
+const mongoose = require('mongoose');
+const userRoute = require('./routes/userRoute');
 
-// Connect to routes
-const users = require('./routes/userRoute');
+// Load environment variables
+dotenv.config();
+connectDB();
 
+// Create express app
 const app = express();
+
+// Environment variables
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB database
-mongoose.connect(config.database);
-mongoose.connection.on('connected', () => {
-    console.log('Connected to database: ' + config.database);
-});
-mongoose.connection.on('error', (err) => {
-    console.log('Database error: ' + err);
-});
-
-// CORS Middleware
+// Middleware configuration
 app.use(cors());
+app.use(express.json());  // Parse incoming JSON requests
 
-// Express Session Middleware
+// Session configuration
 app.use(session({
-    secret: 'keyboard',
+    secret: process.env.JWT_SECRET,
     resave: true,
     saveUninitialized: true
 }));
 
-// Body Parser Middleware
-app.use(bodyParser.json());
-
-// Passport Middleware
+// Passport setup
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
-
-// Set Static Folder
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', users);
+// API Routes
+app.use('/users', userRoute);
 
-// Index Route
+// Root route
 app.get('/', (req, res) => {
     res.send('Hello World! Grow & Give Homepage');
 });
 
-// Start Server
+// Server startup
 app.listen(port, () => {
-    console.log('Server started on port ' + port)
-    console.log('http://localhost:' + port)
+    console.log(`Server started successfully: http://localhost:${port}`);
 });

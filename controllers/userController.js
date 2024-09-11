@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel'); // Import the model
 
 // Add new user
-exports.addUser = async (req, res) => {
+exports.addUser = async (req) => {
     const { name, email, password } = req.body;
 
     try {
@@ -11,26 +11,26 @@ exports.addUser = async (req, res) => {
         const newUser = new User({ name, email, password: hash });
 
         await newUser.save();
-        res.status(201).json({ message: "User registered successfully" });
+        return { success: true, message: "User registered successfully" }; // Return result, don't send response
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        throw new Error(error.message);  // Throw error to be caught by the route
     }
 }
 
+
+// Get user by email
 // Get user by email
 exports.getUserByEmail = async (req, res) => {
     const { email } = req.body;
 
     try {
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.json(user);
+        return user;  // Do NOT send a response here, just return the user data
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        throw error;  // Let the error propagate back to the route
     }
-}
+};
+
 
 // Compare password
 exports.comparePassword = async (candidatePassword, userPasswordHash) => {
