@@ -2,7 +2,7 @@
 Repo for WEB701 A2 and comparing MEAN stack
 
 ## Running the App
-1. Install dependencies
+1. Install dependenciess
 ```bash
 npm install
 ```
