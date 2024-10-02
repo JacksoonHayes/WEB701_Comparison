@@ -1,0 +1,17 @@
+.jumbotron {
+  padding: 80px;
+  margin-top: 50px;
+  background-color: #b0daac;
+}
+h1 {
+  padding-bottom: 25px;
+}
+
+p {
+  padding-bottom: 20px;
+}
+.btn {
+  padding: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}

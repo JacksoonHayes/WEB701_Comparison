@@ -488,9 +488,7 @@ select:disabled {
 button,
 [type=button],
 [type=reset],
-[type=submit] {
-  -webkit-appearance: button;
-}
+[type=submit],
 button:not(:disabled),
 [type=button]:not(:disabled),
 [type=reset]:not(:disabled),
@@ -546,7 +544,6 @@ legend + * {
 }
 
 [type=search] {
-  -webkit-appearance: textfield;
   outline-offset: -2px;
 }
 
@@ -573,7 +570,6 @@ legend + * {
 
 ::file-selector-button {
   font: inherit;
-  -webkit-appearance: button;
 }
 
 output {
@@ -2403,7 +2399,6 @@ textarea.form-control-lg {
   background-size: contain;
   border: var(--bs-border-width) solid var(--bs-border-color);
   -webkit-print-color-adjust: exact;
-  color-adjust: exact;
   print-color-adjust: exact;
 }
 .form-check-input[type=radio] {
@@ -3016,8 +3011,8 @@ textarea.form-control-lg {
   --bs-btn-color: #fff;
   --bs-btn-bg: #1a1a1a;
   --bs-btn-border-color: #1a1a1a;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #161616;
+  --bs-btn-hover-color: #d1d1d1;
+  --bs-btn-hover-bg: #313131;
   --bs-btn-hover-border-color: #151515;
   --bs-btn-focus-shadow-rgb: 60, 60, 60;
   --bs-btn-active-color: #fff;
@@ -3027,6 +3022,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #1a1a1a;
   --bs-btn-disabled-border-color: #1a1a1a;
+  --bs-btn-border-radius: 5px;
 }
 
 .btn-secondary {

@@ -1,34 +1,18 @@
 <div class="container">
-    <h2>Login</h2>
-  
-    <form formGroup="loginForm" (ngSubmit)="onSubmit()">
-      <!-- Email Input -->
-      <div class="form-group mb-3">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" class="form-control" ngClass="{'is-invalid': submitted && f.email.errors}">
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors?.required">Email is required</div>
-          <div *ngIf="f.email.errors?.email">Invalid email format</div>
+    <h2 class="page-header">Login</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" ngClass="{'is-invalid': submitted && f.email.errors}">
         </div>
-      </div>
-  
-      <!-- Password Input -->
-      <div class="form-group mb-3">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" class="form-control" ngClass="{'is-invalid': submitted && f.password.errors}">
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors?.required">Password is required</div>
-          <div *ngIf="f.password.errors?.minlength">Password must be at least 6 characters</div>
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control" ngClass="{'is-invalid': submitted && f.password.errors}">
+        </div> 
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <a class="btn btn-primary" routerLink="/register">Register</a>
         </div>
-      </div>
-  
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-  
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Login</button>
     </form>
   </div>
   
