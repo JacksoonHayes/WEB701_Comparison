@@ -39,7 +39,7 @@ router.post('/authenticate', async (req, res, next) => {
         if (isMatch) {
             console.log("Password matched, generating token...");
 
-            const token = jwt.sign({ id: user._id }, config.secret, {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
                 expiresIn: 21600 // 6 hours
             });
 
@@ -47,7 +47,7 @@ router.post('/authenticate', async (req, res, next) => {
 
             return res.json({
                 success: true,
-                token: 'JWT ' + token,
+                token: 'JWT' + token,
                 user: {
                     id: user._id,
                     name: user.name,
@@ -60,7 +60,6 @@ router.post('/authenticate', async (req, res, next) => {
         }
     } catch (error) {
         console.error("Error occurred during authentication:", error.message);
-
         // Ensure the error response is returned only once
         return res.status(500).json({ success: false, msg: error.message });
     }

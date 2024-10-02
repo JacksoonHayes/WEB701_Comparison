@@ -1,13 +1,13 @@
 <div class="container">
     <h2 class="page-header">Login</h2>
-    <form (ngSubmit)="onSubmit()">
-        <div class="form-group mb-3">
+    <form (ngSubmit)="onLoginSubmit()">
+        <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" formControlName="email" class="form-control" ngClass="{'is-invalid': submitted && f.email.errors}">
+            <input type="email" class="form-control" [(ngModel)]="email" name="email">
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" formControlName="password" class="form-control" ngClass="{'is-invalid': submitted && f.password.errors}">
+            <input type="password" class="form-control" [(ngModel)]="password" name="password">
         </div> 
         <div class="text-center">
             <input type="submit" class="btn btn-primary" value="Submit">

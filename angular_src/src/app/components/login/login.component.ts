@@ -1,48 +1,45 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm: FormGroup;
-  submitted = false;
-  errorMessage: string = '';
+  email: string = '';
+  password: string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    // Initialize the login form with form controls
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  // Getter to easily access form controls in the template
-  get f() { return this.loginForm.controls; }
+  onLoginSubmit() {
+    const user = {
+      email: this.email,
+      password: this.password
+    };
 
-  // Method called when form is submitted
-  onSubmit() {
-    this.submitted = true;
-
-    // Stop if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    // Dummy login (you can replace this with your backend logic)
-    const { email, password } = this.loginForm.value;
-
-    if (email === 'test@example.com' && password === 'password') {
-      // Redirect on successful login
+      // Login and authenticate the user
+  this.authService.authenticateUser(user).subscribe(data => {
+    if (data.success) {
+      // Store the user data in local storage
+      this.authService.storeUserData(data.token, data.user);
+      // Show a success message
+      alert('You are now logged in.');
+      // Redirect to the dashboard
       this.router.navigate(['/dashboard']);
     } else {
-      // Show error if credentials are incorrect
-      this.errorMessage = 'Invalid email or password';
+      // Show an error message if login fails
+      alert('Login failed. Please try again.');
+      // Redirect back to the login page
+      this.router.navigate(['/login']);
     }
-  }
+  });
+  };
 }
