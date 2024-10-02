@@ -17,8 +17,6 @@ exports.addUser = async (req) => {
     }
 }
 
-
-// Get user by email
 // Get user by email
 exports.getUserByEmail = async (req, res) => {
     const { email } = req.body;

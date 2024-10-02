@@ -14,10 +14,17 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String
+    },
     isAdmin: {
         type: Boolean,
-        default: false,
-      },
+        default: false
+    },
+    vouchers: {
+        type: Number,
+        default: 10
+    }
 });
 
 const User = mongoose.model('User', UserSchema);
