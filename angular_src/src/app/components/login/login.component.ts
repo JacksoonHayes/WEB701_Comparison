@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
-  imports: [RouterLink, FormsModule],
+  imports: [FormsModule],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
@@ -25,21 +25,15 @@ export class LoginComponent {
       password: this.password
     };
 
-      // Login and authenticate the user
-  this.authService.authenticateUser(user).subscribe(data => {
-    if (data.success) {
-      // Store the user data in local storage
-      this.authService.storeUserData(data.token, data.user);
-      // Show a success message
-      alert('You are now logged in.');
-      // Redirect to the dashboard
-      this.router.navigate(['/dashboard']);
-    } else {
-      // Show an error message if login fails
-      alert('Login failed. Please try again.');
-      // Redirect back to the login page
-      this.router.navigate(['/login']);
-    }
-  });
-  };
+    this.authService.authenticateUser(user).subscribe(data => {
+      if (data.success) {
+        this.authService.storeUserData(data.token, data.user);
+        alert('You are now logged in.');
+        this.router.navigate(['/profile']);
+      } else {
+        alert('Login failed. Please try again.');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 }

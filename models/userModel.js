@@ -27,5 +27,15 @@ const UserSchema = mongoose.Schema({
     }
 });
 
+// Static method to find user by ID
+UserSchema.statics.getUserById = async function(id) {
+    try {
+        const user = await this.findById(id);  // Use async/await
+        return user;
+    } catch (error) {
+        throw error;  // Let the caller handle the error
+    }
+};
+
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

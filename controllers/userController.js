@@ -29,6 +29,13 @@ exports.getUserByEmail = async (req, res) => {
     }
 };
 
+exports.getUserById = async (id) => {
+    try {
+        return await User.findById(id);
+    } catch (error) {
+        throw error;
+    }
+}
 
 // Compare password
 exports.comparePassword = async (candidatePassword, userPasswordHash) => {

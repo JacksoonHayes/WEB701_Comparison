@@ -47,7 +47,7 @@ router.post('/authenticate', async (req, res, next) => {
 
             return res.json({
                 success: true,
-                token: 'JWT' + token,
+                token: token,
                 user: {
                     id: user._id,
                     name: user.name,
@@ -65,11 +65,10 @@ router.post('/authenticate', async (req, res, next) => {
     }
 });
 
-
-
-// Profile route
+// Profile route with JWT authentication
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.json({ user: req.user });
+    return res.json({ user: req.user });
 });
+
 
 module.exports = router;
