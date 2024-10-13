@@ -1,7 +1,38 @@
-<div *ngIf="user">
-    <h2 class="page-header">{{ user.name }}</h2>
-    <ul class="list-group">
-        <li class="list-group-item">Email: {{ user.email }}</li>
-        <li class="list-group-item">Name: {{ user.name }}</li>
-    </ul>
+<div class="container">
+    <div *ngIf="user" class="row">
+        <!-- Left Column: Current User Details -->
+        <div class="col-md-5">
+            <h2 class="page-header">Hello! {{ user.name }}</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Email: </strong>{{ user.email }}</li>
+                <li class="list-group-item"><strong>Name: </strong>{{ user.name }}</li>
+            </ul>
+        </div>
+        
+        <!-- Right Column: Update Password -->
+        <div class="col-md-4 offset-md-1">
+            <h4>Update Your Password:</h4>
+            <form (submit)="onSubmit()">
+                <div class="form-group">
+                    <input type="password" id="password" [(ngModel)]="newPassword" name="password" class="form-control" placeholder="Enter new password" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-custom mt-4">Submit Changes</button>
+                </div>
+            </form>
+
+            <!-- Token Redemption Section -->
+            <hr class="my-5">
+            <div class="token-section mt-4 text-center">
+                <h4>Available Tokens</h4>
+                <p>You currently have: <strong>{{ user.tokens }}</strong></p>
+                
+                <div class="text-center">
+                    <button type="button" class="btn btn-success btn-success-custom mt-2" (click)="redeemToken()">
+                        Redeem a Token
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

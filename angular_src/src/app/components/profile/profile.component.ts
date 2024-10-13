@@ -13,11 +13,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProfileComponent {
   user: any;
+  newPassword: string = "";
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
+  
+  onSubmit() {
+    if (this.newPassword) {
+      // Perform password update logic here
+      console.log('New password:', this.newPassword);
+    }
+  }
+
+  redeemToken() {
+  }
 
   ngOnInit() {
     const profileObservable = this.authService.getProfile();
