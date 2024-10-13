@@ -46,7 +46,6 @@ export class AuthService {
       return this.http.get('http://localhost:3000/users/profile', { headers })
         .pipe(map((res: any) => res));
     } else {
-      console.warn('No JWT found or localStorage is not available');
       return null; 
     }
   }

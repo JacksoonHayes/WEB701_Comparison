@@ -33,7 +33,6 @@ export class ProfileComponent {
         }
       );
     } else {
-      console.warn('No profile data or JWT is missing.');
       this.router.navigate(['/login']);
     }
   }
