@@ -20,12 +20,22 @@ export class ProfileComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-    }, err => {
-      console.log(err);
-      // Redirect to login if the profile is not fetched
+    const profileObservable = this.authService.getProfile();
+  
+    if (profileObservable) {
+      profileObservable.subscribe(
+        (profile: any) => {
+          this.user = profile.user;
+        },
+        (err) => {
+          console.log(err);
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      console.warn('No profile data or JWT is missing.');
       this.router.navigate(['/login']);
-    });
+    }
   }
+  
 }

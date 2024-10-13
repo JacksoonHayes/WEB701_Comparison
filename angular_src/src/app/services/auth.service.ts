@@ -33,11 +33,24 @@ export class AuthService {
   }
 
   getProfile() {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get('http://localhost:3000/users/profile', { headers })
-      .pipe(map((res: any) => res));
+    let token: string | null = null;
+  
+    // Check if localStorage is available
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token');
+    }
+  
+    // If there's a token, proceed with the profile request
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.get('http://localhost:3000/users/profile', { headers })
+        .pipe(map((res: any) => res));
+    } else {
+      console.warn('No JWT found or localStorage is not available');
+      return null; 
+    }
   }
+  
 
   logout() {
     this.authToken = null;
