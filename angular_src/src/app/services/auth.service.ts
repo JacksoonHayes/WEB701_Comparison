@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,13 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   authToken: any;
   user: any;
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   constructor(private http: HttpClient) { }
+
+    getIsLoggedIn() {
+      return this.isLoggedInSubject.asObservable();
+    }
 
   registerUser(user: any) {
     let headers = new HttpHeaders();
@@ -30,6 +36,7 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
+    this.isLoggedInSubject.next(true);
   }
 
   getProfile() {
@@ -49,11 +56,20 @@ export class AuthService {
       return null; 
     }
   }
-  
+
+  isLoggedIn() {
+    let token: string | null = null;
+    // Check if localStorage is available
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token');
+    }
+    return token !== null;
+  }
 
   logout() {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    this.isLoggedInSubject.next(false);
   }
 }

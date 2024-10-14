@@ -13,5 +13,5 @@ import { AuthService } from './services/auth.service';
   providers: [ValidateService, AuthService]
 })
 export class AppComponent {
-  title = '-Title of the app-';
+  title = '-WEB701 Angular-';
 }

@@ -1,0 +1,13 @@
+.container {
+    padding-top: 50px;
+}
+.accordion {
+    margin-top: 40px;
+}
+.btn-primary-custom {
+    background-color: rgb(80, 80, 86);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px 18px; 
+}

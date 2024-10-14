@@ -31,7 +31,6 @@ export class LoginComponent {
         alert('You are now logged in.');
         this.router.navigate(['/profile']);
       } else {
-        alert('Login failed. Please try again.');
         this.router.navigate(['/login']);
       }
     });

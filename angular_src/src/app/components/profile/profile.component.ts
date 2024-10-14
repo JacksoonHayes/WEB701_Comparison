@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -11,9 +12,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   user: any;
   newPassword: string = "";
+  isLoggedIn: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -46,6 +48,9 @@ export class ProfileComponent {
     } else {
       this.router.navigate(['/login']);
     }
+
+    // Check if the user is logged in
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
   
 }

@@ -15,9 +15,22 @@ p {
   margin-right: 20px;
 }
 .btn-custom {
-  background-color: rgb(80, 80, 86);
+  background-color: rgb(130, 60, 216);
   border-radius: 10px;
   color: white;
   font-size: 14px;
   padding: 10px 18px; 
+}
+
+.btn-primary-custom {
+  background-color: rgb(130, 60, 216);
+  color: white;
+  border-radius: 10px;
+  font-size: 12px;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.container {
+  padding-top: 80px;
 }
