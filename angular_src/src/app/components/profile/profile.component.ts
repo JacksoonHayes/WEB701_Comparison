@@ -22,11 +22,8 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) {}
   
-  onSubmit() {
-    if (this.newPassword) {
-      // Perform password update logic here
-      console.log('New password:', this.newPassword);
-    }
+  updateDetails() {
+   
   }
 
   redeemToken() {

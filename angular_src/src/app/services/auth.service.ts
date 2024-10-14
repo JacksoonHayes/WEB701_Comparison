@@ -41,12 +41,10 @@ export class AuthService {
 
   getProfile() {
     let token: string | null = null;
-  
     // Check if localStorage is available
     if (typeof window !== 'undefined' && window.localStorage) {
       token = localStorage.getItem('token');
-    }
-  
+    } 
     // If there's a token, proceed with the profile request
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
