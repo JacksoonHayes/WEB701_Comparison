@@ -29,7 +29,6 @@ router.post('/authenticate', async (req, res, next) => {
         if (!user) {
             console.log("User not found.");
             return res.status(404).json({ success: false, msg: 'User not found' });
-            alert("User not found");
         }
 
         console.log("User found, comparing password...");

@@ -49,8 +49,13 @@ export class ProfileComponent implements OnInit {
         alert('Token redeemed successfully!');
       },
       (err) => {
-        console.error(err);
-        alert('Failed to redeem token: ' + err.error.message);
+        if (err.status === 401) {
+          // Handle unauthorized error, maybe redirect to login or show a message
+          alert('Session expired or unauthorized. Please log in again.');
+          this.router.navigate(['/login']);
+        } else {
+          alert('Failed to redeem token: ' + err.error.message);
+        }
       }
     );
   }
