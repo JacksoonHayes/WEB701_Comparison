@@ -45,3 +45,16 @@ exports.comparePassword = async (candidatePassword, userPasswordHash) => {
         throw error;
     }
 }
+
+// Update user password
+exports.updatePassword = async (userId, newPassword) => {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(newPassword, salt);
+        await User.findByIdAndUpdate(userId, { password: hash });
+        return { success: true, message: 'Password updated successfully' };
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+

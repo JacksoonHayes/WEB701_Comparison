@@ -70,5 +70,14 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), (req, r
     return res.json({ user: req.user });
 });
 
+router.put('/update', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        const result = await userController.updatePassword(req.user.id, req.body.newPassword);
+        return res.status(200).json({ success: true, message: 'Password updated successfully' });
+    } catch (error) {
+        return res.status(500).json({ success: false, msg: error.message });
+    }
+});
+
 
 module.exports = router;
