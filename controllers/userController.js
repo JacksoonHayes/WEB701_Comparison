@@ -31,11 +31,16 @@ exports.getUserByEmail = async (req, res) => {
 
 exports.getUserById = async (id) => {
     try {
-        return await User.findById(id);
+        const user = await User.findById(id);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return user;
     } catch (error) {
-        throw error;
+        throw new Error(`Error fetching user by ID: ${error.message}`);
     }
 }
+
 
 // Compare password
 exports.comparePassword = async (candidatePassword, userPasswordHash) => {

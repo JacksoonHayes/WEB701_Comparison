@@ -29,6 +29,7 @@ router.post('/authenticate', async (req, res, next) => {
         if (!user) {
             console.log("User not found.");
             return res.status(404).json({ success: false, msg: 'User not found' });
+            alert("User not found");
         }
 
         console.log("User found, comparing password...");
@@ -78,6 +79,23 @@ router.put('/update', passport.authenticate('jwt', { session: false }), async (r
         return res.status(500).json({ success: false, msg: error.message });
     }
 });
+
+// Redeem token route
+router.post('/redeem-token', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        const user = await userController.getUserById(req.user.id);
+        if (user.vouchers > 0) {
+            user.vouchers -= 1;
+            await user.save();
+            return res.status(200).json({ success: true, vouchers: user.vouchers, message: 'Token redeemed successfully!' });
+        } else {
+            return res.status(400).json({ success: false, message: 'No tokens available to redeem!' });
+        }
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 
 
 module.exports = router;

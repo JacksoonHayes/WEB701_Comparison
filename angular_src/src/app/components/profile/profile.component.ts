@@ -43,8 +43,18 @@ export class ProfileComponent implements OnInit {
   
 
   redeemToken() {
+    this.authService.redeemToken().subscribe(
+      (res: any) => {
+        this.user.vouchers = res.vouchers;  // Update the vouchers count
+        alert('Token redeemed successfully!');
+      },
+      (err) => {
+        console.error(err);
+        alert('Failed to redeem token: ' + err.error.message);
+      }
+    );
   }
-
+  
   ngOnInit() {
     const profileObservable = this.authService.getProfile();
   
