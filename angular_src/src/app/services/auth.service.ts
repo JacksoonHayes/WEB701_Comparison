@@ -55,6 +55,14 @@ export class AuthService {
     }
   }
 
+  updatePassword(newPassword: string) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put('http://localhost:3000/users/update', { newPassword }, { headers })
+      .pipe(map((res: any) => res));
+  }
+  
+
   isLoggedIn() {
     let token: string | null = null;
     // Check if localStorage is available

@@ -23,8 +23,24 @@ export class ProfileComponent implements OnInit {
   ) {}
   
   updateDetails() {
-   
+    if (this.newPassword) {
+      this.authService.updatePassword(this.newPassword).subscribe(
+        (res: any) => {
+          console.log(res.message);
+          // Optionally display a success message to the user
+          alert('Password updated successfully!');
+        },
+        (err) => {
+          console.error('Error updating password:', err);
+          // Optionally display an error message to the user
+          alert('Failed to update password.');
+        }
+      );
+    } else {
+      alert('Please enter a new password.');
+    }
   }
+  
 
   redeemToken() {
   }
