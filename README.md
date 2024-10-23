@@ -14,12 +14,19 @@ MONGODB_URI=mongodb+srv://dbAdmin:admin@growandgive.x8icc.mongodb.net/?retryWrit
 JWT_SECRET="secret"
 ```
 
-3. To run the Angular application, navigation to the /angular-src directory and run the following:
+3. To run the backend server, run the following:
+```bash
+nodemon
+```
+
+## Either run the Angular or React application
+
+4. To run the Angular application, navigation to the /angular-src directory and run the following:
 ```bash
 ng serve
 ```
 
-4. To run the React application, navigation to the /react-src directory and run the following:
+5. To run the React application, navigation to the /react-src directory and run the following:
 ```bash
 npm start
 ```
