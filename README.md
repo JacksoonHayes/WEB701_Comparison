@@ -18,3 +18,4 @@ JWT_SECRET="secret"
 ```bash
 npm start
 ```
+test
