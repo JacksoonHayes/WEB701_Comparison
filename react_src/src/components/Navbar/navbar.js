@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './navbar.css';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -12,9 +13,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">Auth App</a>
+        <a className="navbar-brand" href="/">React Auth App</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -36,7 +37,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                   <Link className="nav-link" to="/profile">Profile</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={handleLogout}>Logout</a>
+                  <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
                 </li>
               </>
             )}
