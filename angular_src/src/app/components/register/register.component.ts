@@ -38,18 +38,19 @@ export class RegisterComponent {
       // Show an error message if email is invalid
       alert('Please enter a valid email address.');
     }
-    // Register the user
-    this.authService.registerUser(user).subscribe(data => {
-      if (data.success) {
-        // Registration successful message
-        alert('You are now registered and can log in.');
-        // Redirect to login page
+    this.authService.registerUser(user).subscribe(
+      (res: any) => {
+        // Registration successful
+        alert('Registration successful!');
         this.router.navigate(['/login']);
-      } else {
-        // Show an error message if registration fails
-        alert('Something went wrong. Please try again.');
-        this.router.navigate(['/register']);
-      }
+      },
+      (err: any) => {
+        // Check if the error is due to a duplicate email
+        if (err.status === 400 && err.error.msg === 'Email is already registered') {
+          alert('This email is already registered. Please use another one.');
+        } else {
+          alert('Registration failed. Please try again.');
+        }
     });
   }
 }

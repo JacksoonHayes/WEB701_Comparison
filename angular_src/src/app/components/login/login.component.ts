@@ -20,6 +20,7 @@ export class LoginComponent {
   ) {}
 
   onLoginSubmit() {
+    console.log('Login form submitted');
     const user = {
       email: this.email,
       password: this.password

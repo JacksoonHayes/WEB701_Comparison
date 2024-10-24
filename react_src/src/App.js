@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import 'bootswatch/dist/lux/bootstrap.css';
+import './index.css';
+import './pages/login/login.css';
 import Navbar from './components/nav/navbar.js';
 import Login from './pages/login/login.js';
 import Register from './pages/register/register.js';
 import Profile from './pages/profile/profile.js';
-import 'bootswatch/dist/lux/bootstrap.css';
-import './index.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

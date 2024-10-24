@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './login.css';
 import { useNavigate } from 'react-router-dom';
 import { authenticateUser, storeUserData } from '../../services/authService.js';
+import './login.css';
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
@@ -26,12 +26,12 @@ const Login = ({ setIsLoggedIn }) => {
       alert('Login failed. Please check your credentials.');
     }
   };
-
+ 
   return (
-    <div className="container">
+    <div className="container" id="login-container">
       <h2 className="page-header">Login</h2>
       <form onSubmit={onLoginSubmit}>
-        <div className="form-group">
+        <div className="form-group" id="login-form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -42,7 +42,7 @@ const Login = ({ setIsLoggedIn }) => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" id="login-form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -54,8 +54,8 @@ const Login = ({ setIsLoggedIn }) => {
           />
         </div>
         <div className="text-center">
-          <input type="submit" className="btn btn-custom" value="Submit" />
-          <a className="btn btn-custom" href="/register">Register</a>
+          <input type="submit" className="btn btn-custom" value="Submit" id="login-btn"/>
+          <a className="btn btn-custom" href="/register" id="login-btn">Register</a>
         </div>
       </form>
     </div>

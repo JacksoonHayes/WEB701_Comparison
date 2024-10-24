@@ -12,9 +12,14 @@ router.post('/register', async (req, res) => {
         const result = await userController.addUser(req);
         return res.status(201).json(result);  // Send response here
     } catch (error) {
-        return res.status(500).json({ success: false, msg: error.message });
+        if (error.message === 'Email is already registered') {
+            return res.status(400).json({ success: false, msg: error.message });
+        } else {
+            return res.status(500).json({ success: false, msg: error.message });
+        }
     }
 });
+
 
 // Authenticate route
 router.post('/authenticate', async (req, res, next) => {

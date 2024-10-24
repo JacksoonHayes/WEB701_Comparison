@@ -52,13 +52,13 @@ const Profile = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" id="profile-container">
       {user ? (
         <div className="row">
           {/* Left Column: User Details */}
           <div className="col-md-5">
             <h2 className="page-header">Hello, {user.name}!</h2>
-            <ul className="list-group">
+            <ul className="list-group" id="profile-list-group">
               <li className="list-group-item"><strong>Email:</strong> {user.email}</li>
               <li className="list-group-item"><strong>Name:</strong> {user.name}</li>
             </ul>
@@ -68,7 +68,7 @@ const Profile = () => {
           <div className="col-md-4 offset-md-1">
             <h4>Update Your Password:</h4>
             <form onSubmit={handleUpdatePassword}>
-              <div className="form-group">
+              <div className="form-group" id="profile-form-group">
                 <input
                   type="password"
                   className="form-control"
@@ -79,7 +79,7 @@ const Profile = () => {
                 />
               </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-custom mt-4">Submit Changes</button>
+                <button type="submit" className="btn btn-custom mt-4" id="profile-btn">Submit Changes</button>
               </div>
             </form>
 
@@ -92,6 +92,7 @@ const Profile = () => {
                 type="button"
                 className="btn btn-success btn-success-custom mt-2"
                 onClick={handleRedeemToken}
+                id="profile-redeem-btn"
               >
                 Redeem a Voucher
               </button>

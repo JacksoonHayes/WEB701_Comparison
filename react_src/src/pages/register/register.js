@@ -35,10 +35,10 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" id="register-container">
       <h2 className="page-header">Register</h2>
       <form onSubmit={onRegisterSubmit}>
-        <div className="form-group">
+        <div className="form-group" id="register-form-group">
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -69,7 +69,7 @@ const Register = () => {
           />
         </div>
         <div className="text-center">
-          <input type="submit" className="btn btn-custom" value="Register" />
+          <input type="submit" className="btn btn-custom" id="register-btn" value="Register" />
         </div>
       </form>
     </div>
