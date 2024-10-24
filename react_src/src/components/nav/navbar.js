@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
+import { logout } from '../../services/authService';  // Import logout function from authService
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Assuming JWT is stored in localStorage
-    setIsLoggedIn(false);
+    logout(); // Call the authService's logout function
+    setIsLoggedIn(false); // Update the logged-in state
     alert('You are now logged out.');
     navigate('/login');
   };
 
   return (
-    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/login">React Auth App</a>
+        <a className="navbar-brand" href="/">React Auth App</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

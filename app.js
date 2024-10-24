@@ -41,13 +41,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API Routes
 app.use('/users', userRoute);
 
-
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({ success: false, message: 'Unauthorized' });
     }
 });
-
 
 // Server startup
 app.listen(port, () => {

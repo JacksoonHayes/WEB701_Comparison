@@ -40,12 +40,12 @@ export const storeUserData = (token, user) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 
-// Retrieve user profile by sending a GET request with the token
+// Fetch user profile using the stored token
 export const getProfile = async () => {
   const token = localStorage.getItem('token');
   if (token) {
     try {
-      const response = await fetch(`${API_URL}/profile`, {
+      const response = await fetch('http://localhost:3000/users/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,6 +59,49 @@ export const getProfile = async () => {
   }
   return null;
 };
+
+// Update user password
+export const updatePassword = async (newPassword) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const response = await fetch('http://localhost:3000/users/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ newPassword }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error updating password:', error);
+      return { success: false };
+    }
+  }
+  return { success: false };
+};
+
+// Redeem token for vouchers
+export const redeemToken = async () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      const response = await fetch('http://localhost:3000/users/redeem-token', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error redeeming token:', error);
+      return null;
+    }
+  }
+  return null;
+};
+
 
 // Check if the user is logged in based on the presence of the token
 export const isLoggedIn = () => {
