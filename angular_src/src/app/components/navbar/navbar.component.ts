@@ -19,15 +19,17 @@ export class NavbarComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
+  // Check if the user is logged in
   ngOnInit() {
     this.authService.getIsLoggedIn().subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
   }
 
+  // Function to handle the logout button click
   onLogoutClick() {
     this.authService.logout();
     alert('You are now logged out.');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']); // Redirect to the login page
   }
 }
