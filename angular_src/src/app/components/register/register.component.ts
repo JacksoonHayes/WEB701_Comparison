@@ -13,18 +13,20 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  name: string = '';
-  email: string = '';
-  password: string = '';
+  name: string = ''; // Initialize name to an empty string
+  email: string = ''; // Initialize email to an empty string
+  password: string = ''; // Initialize password to an empty string
 
+  // Inject the ValidateService, AuthService, and Router into the constructor
   constructor(
     private validateService: ValidateService,
     private authService: AuthService,
     private router: Router
   ) { }
 
-  onRegisterSubmit() {
-    const user = {
+  // Function to handle the registration form submission
+  onRegisterSubmit() { 
+    const user = { // Create a user object with the name, email, and password
       name: this.name,
       email: this.email,
       password: this.password

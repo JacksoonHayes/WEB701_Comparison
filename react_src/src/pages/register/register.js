@@ -4,10 +4,12 @@ import { validateRegister, validateEmail } from '../../services/validationServic
 import { registerUser } from '../../services/authService';
 import './register.css';
 
+// The Register component is a functional component that renders a registration form.
 const Register = () => {
-  const [user, setUser] = useState({ name: '', email: '', password: '' });
-  const navigate = useNavigate();
+  const [user, setUser] = useState({ name: '', email: '', password: '' }); // Declare the user state variable
+  const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
+  // The onRegisterSubmit function is an asynchronous function that handles the form submission.
   const onRegisterSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,15 +27,16 @@ const Register = () => {
 
     // Proceed with registration
     const response = await registerUser(user);
-    if (response.success) {
+    if (response.success) { // Check if the registration was successful
       alert('You are now registered and can log in.');
-      navigate('/login');
+      navigate('/login'); // Redirect the user to the login page
     } else {
       alert('Something went wrong. Please try again.');
-      navigate('/register');
+      navigate('/register'); // Redirect the user to the registration page
     }
   };
 
+  // The return statement renders the registration form. The form has input fields for name, email, password, and a submit button.
   return (
     <div className="container" id="register-container">
       <h2 className="page-header">Register</h2>

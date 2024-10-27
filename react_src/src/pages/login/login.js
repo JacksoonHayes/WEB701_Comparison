@@ -3,30 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import { authenticateUser, storeUserData } from '../../services/authService.js';
 import './login.css';
 
+// The Login component is a functional component that renders a login form.
 const Login = ({ setIsLoggedIn }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState(''); // Declare the email state variable and its setter function
+  const [password, setPassword] = useState(''); // Declare the password state variable and its setter function
+  const navigate = useNavigate(); 
 
+  // The onLoginSubmit function is an asynchronous function that handles the form submission.
   const onLoginSubmit = async (e) => {
     e.preventDefault();
-
+    
+    // Create a user object with the email and password
     const user = {
       email,
       password,
     };
 
+    // Call the authenticateUser function with the user object
     const response = await authenticateUser(user);
     if (response.success) {
-      storeUserData(response.token, response.user);
-      setIsLoggedIn(true);
+      storeUserData(response.token, response.user); // Store the token and user data in localStorage
+      setIsLoggedIn(true); // Set the isLoggedIn state to true
       alert('You are now logged in.');
-      navigate('/profile');
+      navigate('/profile'); // Redirect the user to the profile page
     } else {
       alert('Login failed. Please check your credentials.');
     }
   };
  
+  // The return statement renders the login form. The form has two input fields for email and password, and a submit button.
   return (
     <div className="container" id="login-container">
       <h2 className="page-header">Login</h2>

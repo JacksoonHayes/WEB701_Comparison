@@ -3,22 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { getProfile, updatePassword, redeemToken } from '../../services/authService';
 import './profile.css';
 
+// The Profile component is a functional component that renders the user profile page.
 const Profile = () => {
-  const [user, setUser] = useState(null); // For storing user data
-  const [newPassword, setNewPassword] = useState('');
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null); // Declare the user state variable
+  const [newPassword, setNewPassword] = useState(''); // Declare the newPassword state variable
+  const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
   // Fetch user profile when component mounts
   useEffect(() => {
     const fetchProfile = async () => {
-      const profile = await getProfile();
+      const profile = await getProfile(); // Call the getProfile function to fetch the user profile
       if (profile && profile.user) {
-        setUser(profile.user); // Set user data
+        setUser(profile.user); // Set user data 
       } else {
         navigate('/login'); // Redirect to login if no profile data
       }
     };
 
+    // Call the fetchProfile function
     fetchProfile();
   }, [navigate]);
 
@@ -26,15 +28,16 @@ const Profile = () => {
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
 
-    if (!newPassword) {
+    if (!newPassword) { // Check if the new password is empty
       alert('Please enter a new password.');
       return;
     }
 
+    // Call the updatePassword function with the new password
     const response = await updatePassword(newPassword);
-    if (response.success) {
+    if (response.success) { // Check if the password was updated successfully
       alert('Password updated successfully!');
-      setNewPassword('');
+      setNewPassword(''); // Clear the newPassword state
     } else {
       alert('Failed to update password. Please try again.');
     }
@@ -42,15 +45,16 @@ const Profile = () => {
 
   // Handle redeeming token
   const handleRedeemToken = async () => {
-    const response = await redeemToken();
+    const response = await redeemToken(); // Call the redeemToken function
     if (response && response.vouchers) {
-      setUser({ ...user, vouchers: response.vouchers });
+      setUser({ ...user, vouchers: response.vouchers }); // Update the user state with the new voucher count
       alert('Token redeemed successfully!');
     } else {
       alert('Failed to redeem token.');
     }
   };
 
+  // Render the user profile page
   return (
     <div className="container" id="profile-container">
       {user ? (

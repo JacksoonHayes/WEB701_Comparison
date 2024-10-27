@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/authService';  // Import logout function from authService
 import './navbar.css';
 
+// The Navbar component is a functional component that renders the navigation bar.
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
 
+  // The handleLogout function logs the user out and updates the logged-in state.
   const handleLogout = () => {
     logout(); // Call the authService's logout function
     setIsLoggedIn(false); // Update the logged-in state

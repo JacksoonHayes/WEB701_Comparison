@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ContactComponent } from './components/contact/contact.component';
 
+// Route Configuration for the application
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'register', component: RegisterComponent },

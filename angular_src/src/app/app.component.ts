@@ -7,7 +7,7 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, RouterModule, NavbarComponent],
+  imports: [RouterLink, RouterOutlet, RouterModule, NavbarComponent], // Add RouterLink, RouterOutlet, RouterModule, NavbarComponent to imports
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [ValidateService, AuthService]
